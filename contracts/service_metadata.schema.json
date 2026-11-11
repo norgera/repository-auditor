@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "required": ["id", "name", "description", "capabilities", "url", "version", "accepts", "inputMode", "maxBytes"],
+  "properties": {
+    "id": {"type": "string"},
+    "name": {"type": "string"},
+    "description": {"type": "string"},
+    "capabilities": {"type": "array", "items": {"type": "string"}},
+    "url": {"type": "string"},
+    "version": {"type": "string"},
+    "tool": {"type": ["string", "null"]},
+    "accepts": {"type": "array", "items": {"type": "string"}},
+    "inputMode": {"enum": ["files", "baseline-target"]},
+    "maxBytes": {"type": "integer"}
+  }
+}

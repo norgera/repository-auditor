@@ -1,0 +1,91 @@
+{
+  "name": "repository-auditor",
+  "displayName": "Repository Auditor",
+  "description": "Finds release risks through dynamically discovered cloud scanner services.",
+  "version": "0.1.0",
+  "publisher": "cs4471-group4",
+  "private": true,
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onView:repositoryAuditor.catalog"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "repositoryAuditor",
+          "title": "Repository Auditor",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "repositoryAuditor": [
+        {
+          "id": "repositoryAuditor.catalog",
+          "name": "Scanners",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "repositoryAuditor.search",
+        "title": "Search Scanners",
+        "icon": "$(search)",
+        "category": "Repository Auditor"
+      },
+      {
+        "command": "repositoryAuditor.clearSearch",
+        "title": "Clear Search",
+        "icon": "$(clear-all)",
+        "category": "Repository Auditor"
+      },
+      {
+        "command": "repositoryAuditor.selectProfile",
+        "title": "Select Release Profile",
+        "icon": "$(checklist)",
+        "category": "Repository Auditor"
+      }
+    ],
+    "configuration": {
+      "title": "Repository Auditor",
+      "properties": {
+        "repositoryAuditor.registries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "http://127.0.0.1:8701",
+            "http://127.0.0.1:8702"
+          ],
+          "description": "Registry URLs in failover order: primary first, then backup."
+        },
+        "repositoryAuditor.customProfile": {
+          "type": "object",
+          "default": {
+            "failAt": "high",
+            "requiredKeys": []
+          },
+          "description": "Rules for the custom release profile."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "test": "tsc -p . && node --test test/"
+  },
+  "devDependencies": {
+    "@types/node": "18.19.50",
+    "@types/vscode": "1.85.0",
+    "typescript": "5.4.5"
+  }
+}

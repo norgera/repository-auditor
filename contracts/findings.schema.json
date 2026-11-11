@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "required": ["service", "tool", "toolVersion", "status", "message", "findings", "skipped"],
+  "properties": {
+    "service": {"type": "string"},
+    "tool": {"type": ["string", "null"]},
+    "toolVersion": {"type": ["string", "null"]},
+    "status": {"enum": ["complete", "partial", "unsupported", "too_large", "timeout", "error"]},
+    "message": {"type": "string"},
+    "skipped": {"type": "array", "items": {"type": "string"}},
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule", "severity", "file", "location", "message"],
+        "properties": {
+          "rule": {"type": "string"},
+          "severity": {"enum": ["critical", "high", "medium", "low", "info", "unknown"]},
+          "file": {"type": "string"},
+          "location": {"type": "string"},
+          "message": {"type": "string"},
+          "remediation": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

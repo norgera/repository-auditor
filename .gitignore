@@ -1,0 +1,5 @@
+__pycache__/
+node_modules/
+extension/out/
+demo/results.json
+*.vsix
